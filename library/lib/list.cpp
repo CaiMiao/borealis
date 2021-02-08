@@ -511,6 +511,23 @@ bool InputListItem::onClick()
     return true;
 }
 
+CustomInputListItem::CustomInputListItem(std::string label, std::string initialValue, std::string helpText, std::string description, int maxInputLength, int swkbdType, int kbdDisableBitmask)
+    : InputListItem(label, initialValue, helpText, description, maxInputLength, kbdDisableBitmask)
+    , swkbdType(swkbdType)
+{
+}
+
+bool CustomInputListItem::onClick()
+{
+    Swkbd::openForText([&](std::string text) {
+        this->setValue(text, false);
+    },
+        this->helpText, "", this->maxInputLength, this->getValue(), this->kbdDisableBitmask, this->swkbdType);
+
+    ListItem::onClick();
+    return true;
+}
+
 IntegerInputListItem::IntegerInputListItem(std::string label, int initialValue, std::string helpText, std::string description, int maxInputLength, int kbdDisableBitmask)
     : InputListItem(label, std::to_string(initialValue), helpText, description, maxInputLength, kbdDisableBitmask)
 {

@@ -171,6 +171,19 @@ class InputListItem : public ListItem
     virtual bool onClick() override;
 };
 
+// A list item which spawns defined type of swkbd
+// to input its value (string)
+class CustomInputListItem : public InputListItem
+{
+  protected:
+    int swkbdType;
+
+  public:
+    CustomInputListItem(std::string label, std::string initialValue, std::string helpText, std::string description = "", int maxInputLength = 32, int swkbdType = 0, int kbdDisableBitmask = KeyboardKeyDisableBitmask::KEYBOARD_DISABLE_NONE);
+
+    virtual bool onClick() override;
+};
+
 // A list item which spawns the swkbd
 // to input its value (integer)
 class IntegerInputListItem : public InputListItem

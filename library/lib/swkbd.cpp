@@ -99,12 +99,12 @@ static std::string terminalInput(std::string text)
 }
 #endif
 
-bool Swkbd::openForText(std::function<void(std::string)> f, std::string headerText, std::string subText, int maxStringLength, std::string initialText, int kbdDisableBitmask)
+bool Swkbd::openForText(std::function<void(std::string)> f, std::string headerText, std::string subText, int maxStringLength, std::string initialText, int kbdDisableBitmask, int swkbdType)
 {
 #ifdef __SWITCH__
     SwkbdConfig config = createSwkbdBaseConfig(headerText, subText, maxStringLength, initialText);
 
-    swkbdConfigSetType(&config, SwkbdType_Normal);
+    swkbdConfigSetType(&config, SwkbdType(swkbdType)); // default to SwkbdType_Normal
     swkbdConfigSetKeySetDisableBitmask(&config, getSwkbdKeyDisableBitmask(kbdDisableBitmask));
 
     char buffer[0x100];
